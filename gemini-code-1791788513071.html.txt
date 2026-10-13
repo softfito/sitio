@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago Taxi - Transferencia</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f6f8;
+            color: #111;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 {
+            font-size: 1.4rem;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 24px;
+        }
+        .info-box {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+        .value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .clabe-container {
+            background: #e0f2fe;
+            border: 2px dashed #0284c7;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+        .clabe-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0369a1;
+            letter-spacing: 1px;
+            word-break: break-all;
+            margin: 8px 0;
+        }
+        .btn {
+            background-color: #16a34a;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(22, 163, 74, 0.2);
+            transition: background-color 0.2s;
+        }
+        .btn:active {
+            background-color: #15803d;
+            transform: scale(0.98);
+        }
+        .footer {
+            margin-top: 24px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Taxi Ciudad Valles</h1>
+        <p class="subtitle">Realiza tu pago rápido y seguro</p>
+
+        <div class="info-box">
+            <div class="label">Banco</div>
+            <div class="value" id="banco">Banco Azteca</div>
+        </div>
+
+        <div class="info-box">
+            <div class="label">Titular de la Cuenta</div>
+            <div class="value" id="titular">Nombre del Chofer</div>
+        </div>
+
+        <div class="clabe-container">
+            <div class="label">CLABE Interbancaria</div>
+            <div class="clabe-number" id="clabeText">000000000000000000</div>
+        </div>
+
+        <button class="btn" id="copyBtn" onclick="copiarClabe()">Copiar CLABE al Portapapeles</button>
+
+        <div class="footer">
+            Presenta tu comprobante de pago al conductor al terminar el viaje.
+        </div>
+    </div>
+
+    <script>
+        function copiarClabe() {
+            const clabe = document.getElementById('clabeText').innerText.trim();
+            const btn = document.getElementById('copyBtn');
+
+            navigator.clipboard.writeText(clabe).then(() => {
+                btn.innerText = "¡CLABE Copiada con Éxito! ✓";
+                btn.style.backgroundColor = "#0284c7";
+                
+                setTimeout(() => {
+                    btn.innerText = "Copiar CLABE al Portapapeles";
+                    btn.style.backgroundColor = "#16a34a";
+                }, 3000);
+            }).catch(err => {
+                alert('No se pudo copiar automáticamente. Por favor selecciónala manualmente.');
+            });
+        }
+    </script>
+
+</body>
+</html>
